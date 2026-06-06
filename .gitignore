@@ -1,6 +1,8 @@
 # ── Secrets & environment files ─────────────────────────────────────
 backend/.env               # <-- NEVER commit the real production .env
-frontend/.env*             # any .env used by the UI (keep local only)
+frontend/.env*  
+backend/venv/
+           # any .env used by the UI (keep local only)
 
 # ── Python / FastAPI ───────────────────────────────────────────────
 __pycache__/               # compiled .pyc files
