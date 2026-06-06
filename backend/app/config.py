@@ -18,11 +18,19 @@ class Settings:
     # Database file stored in user‑specific folder (default: C:\Users\<username>\.aether_rag)
     USER_DATA_ROOT: Path = Path(os.getenv("USER_DATA_ROOT", Path.home() / ".aether_rag"))
     USER_DATA_ROOT.mkdir(parents=True, exist_ok=True)
-
-    DATABASE_URL: str = os.getenv(
-        "DATABASE_URL",
-        f"sqlite:///{USER_DATA_ROOT / 'rag_app.db'}"
+    
+    database_url = os.getenv(
+    "DATABASE_URL",
+    f"sqlite:///{USER_DATA_ROOT / 'rag_app.db'}"
+)
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace(
+        "postgres://",
+        "postgresql://",
+        1
     )
+    DATABASE_URL: str = database_url
+
     SECRET_KEY: str = os.getenv("SECRET_KEY", "aether_rag_secret_key_change_me_in_prod")
     ALGORITHM: str = os.getenv("ALGORITHM", "HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440"))
@@ -34,7 +42,7 @@ class Settings:
     
     # Langchain config
     EMBEDDING_MODEL_NAME: str = os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2")
-    GROQ_MODEL_NAME: str = os.getenv("GROQ_MODEL_NAME", "mixtral-8x7b-32768")
+    GROQ_MODEL_NAME: str = os.getenv("GROQ_MODEL_NAME", "llama-3.3-70b-versatile")
 
 settings = Settings()
 
