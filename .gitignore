@@ -1,0 +1,39 @@
+# ── Secrets & environment files ─────────────────────────────────────
+backend/.env               # <-- NEVER commit the real production .env
+frontend/.env*             # any .env used by the UI (keep local only)
+
+# ── Python / FastAPI ───────────────────────────────────────────────
+__pycache__/               # compiled .pyc files
+*.py[cod]                  # compiled byte‑code
+*.sqlite3                  # local dev DB (if you ever create one)
+*.db                       # same as above
+venv/                      # virtual environment folder
+.env                       # generic catch‑all (just in case)
+*.pkl                      # pickled objects you may generate locally
+
+# ── Node / React (frontend) ───────────────────────────────────────
+node_modules/              # huge dependency folder
+dist/                      # build output (Vercel creates its own)
+.next/                     # Next.js build output (if you use Next)
+out/                       # static export folder (if any)
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json          # optional – keep if you want deterministic builds, otherwise delete
+yarn.lock                  # same as above
+
+# ── OS / Editor artefacts ────────────────────────────────────────
+.DS_Store                  # macOS
+Thumbs.db                  # Windows image cache
+desktop.ini                # Windows folder customisation
+.idea/                     # JetBrains IDE settings
+.vscode/                   # VS Code workspace settings
+*.suo
+*.user
+*.log
+
+# ── Render / Vercel specific ─────────────────────────────────────
+render.yaml                # OPTIONAL – keep if you want to version the Render config
+Dockerfile                 # keep **only** if you decide to use Docker later
+Procfile                   # keep – it tells Render how to start the service
+runtime.txt                # keep – tells Render the Python version
