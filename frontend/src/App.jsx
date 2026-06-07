@@ -16,15 +16,15 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [appInitializing, setAppInitializing] = useState(true);
 
-  // Custom API key from UI
+
   const [groqKey, setGroqKey] = useState(localStorage.getItem('groq_api_key') || '');
 
-  // Toast notifications
+ 
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const showToast = useCallback((message, type = 'success') => {
     setToast({ show: true, message, type });
-    // auto-dismiss toast after 4s
+   
     setTimeout(() => {
       setToast(prev => ({ ...prev, show: false }));
     }, 4000);
