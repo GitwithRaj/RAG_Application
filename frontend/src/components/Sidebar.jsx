@@ -56,7 +56,7 @@ export default function Sidebar({
     formData.append('file', file);
 
     try {
-      await axios.post(`${API_BASE}/files/upload`, formData, {
+      await axios.post(`${API_BASE}/api/files/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -80,7 +80,7 @@ export default function Sidebar({
     if (!confirm('Are you sure you want to delete this file? This will remove it from search index.')) return;
 
     try {
-      await axios.delete(`${API_BASE}/files/${fileId}`, {
+      await axios.delete(`${API_BASE}/api/files/${fileId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       showToast('File deleted successfully', 'success');
@@ -104,7 +104,7 @@ export default function Sidebar({
     setSavingNote(true);
     try {
       await axios.post(
-        `${API_BASE}/files/text`, 
+        `${API_BASE}/api/files/text`, 
         { title: noteTitle, content: noteContent },
         { headers: { Authorization: `Bearer ${token}` } }
       );

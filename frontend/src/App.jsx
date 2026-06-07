@@ -33,7 +33,7 @@ export default function App() {
   const fetchFiles = useCallback(async (authToken = token) => {
     if (!authToken) return;
     try {
-      const res = await axios.get(`${API_BASE}/files`, {
+      const res = await axios.get(`${API_BASE}/api/files`, {
         headers: { Authorization: `Bearer ${authToken}` }
       });
       setFiles(res.data);
@@ -50,7 +50,7 @@ export default function App() {
     }
 
     try {
-      const meRes = await axios.get(`${API_BASE}/auth/me`, {
+      const meRes = await axios.get(`${API_BASE}/api/auth/me`, {
         headers: { Authorization: `Bearer ${storedToken}` }
       });
       setToken(storedToken);
@@ -103,7 +103,7 @@ export default function App() {
       }
 
       const res = await axios.post(
-        `${API_BASE}/chat/query`,
+        `${API_BASE}/api/chat/query`,
         {
           question: text,
           file_ids: selectedFileIds.length > 0 ? selectedFileIds : null

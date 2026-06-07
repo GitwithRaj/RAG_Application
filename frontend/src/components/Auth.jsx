@@ -25,7 +25,7 @@ export default function Auth({ onAuthSuccess, showToast }) {
         params.append('username', email);
         params.append('password', password);
 
-        const res = await axios.post(`${API_BASE}/auth/login`, params, {
+        const res = await axios.post(`${API_BASE}/api/auth/login`, params, {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
         
@@ -33,14 +33,14 @@ export default function Auth({ onAuthSuccess, showToast }) {
         localStorage.setItem('token', token);
         
         // Get user info
-        const meRes = await axios.get(`${API_BASE}/auth/me`, {
+        const meRes = await axios.get(`${API_BASE}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
         showToast('Login successful!', 'success');
         onAuthSuccess(token, meRes.data);
       } else {
-        await axios.post(`${API_BASE}/auth/register`, { email, password });
+        await axios.post(`${API_BASE}/api/auth/register`, { email, password });
         showToast('Registration successful! Please login.', 'success');
         setIsLogin(true);
         setPassword('');
