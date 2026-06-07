@@ -4,14 +4,17 @@ sqlalchemy
 passlib[bcrypt]
 python-jose[cryptography]
 python-multipart
+
 langchain
 langchain-community
 langchain-groq
-sentence-transformers
+
+jina
 faiss-cpu
 pypdf
+
 pydantic
 pydantic-settings
 email-validator
-psycopg2-binary
 
+psycopg2-binary

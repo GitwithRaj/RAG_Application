@@ -3,14 +3,13 @@ from typing import List, Optional
 import pypdf
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import JinaEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
 from app.config import settings
 
-# Initialize HuggingFace embeddings locally
-# This downloads the small all-MiniLM-L6-v2 model (~90MB) on first use
-embeddings = HuggingFaceEmbeddings(model_name=settings.EMBEDDING_MODEL_NAME)
+# Initialize Jina embeddings using API key
+embeddings = JinaEmbeddings(jina_api_key=settings.JINA_API_KEY, model_name=settings.EMBEDDING_MODEL_NAME)
 
 def get_user_vectorstore_dir(user_id: int) -> str:
     user_dir = settings.VECTOR_STORE_DIR / f"user_{user_id}"

@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from langchain_community.embeddings import JinaEmbeddings
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,13 +36,15 @@ class Settings:
     ALGORITHM: str = os.getenv("ALGORITHM", "HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440"))
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    JINA_API_KEY: str = os.getenv("JINA_API_KEY", "")
     
     # Storage paths – all inside the user‑specific folder
     UPLOAD_DIR: Path = USER_DATA_ROOT / "uploads"
     VECTOR_STORE_DIR: Path = USER_DATA_ROOT / "vector_stores"
     
     # Langchain config
-    EMBEDDING_MODEL_NAME: str = os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2")
+    embeddings = JinaEmbeddings(jina_api_key=JINA_API_KEY, model_name=os.getenv("EMBEDDING_MODEL_NAME", "jina-embeddings-v3"))
+    EMBEDDING_MODEL_NAME: str = os.getenv("EMBEDDING_MODEL_NAME", "jina-embeddings-v3")
     GROQ_MODEL_NAME: str = os.getenv("GROQ_MODEL_NAME", "llama-3.3-70b-versatile")
 
 settings = Settings()
